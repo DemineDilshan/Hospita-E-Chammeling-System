@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Add Schedule</title>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+	integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+	crossorigin="anonymous">
+<link rel="stylesheet" href="AdmnStyles.css">
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+	integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+	crossorigin="anonymous"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+	integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+	crossorigin="anonymous"></script>
+
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+<!-- JS For Update & New Doctor Modal -->
+<script type="text/javascript">
+	$('document').ready(function() {
+		$('table #editButton').on('click', function(event) {
+
+			event.preventDefault();
+
+			var href = $(this).attr('href')
+
+			$.get(href, function(doctor) {
+				$('#id').val(doctor.id);
+				$('#name').val(doctor.name);
+				$('#email').val(doctor.email);
+				$('#telephone').val(doctor.telephone);
+				$('#specialty').val(doctor.specialty);
+				$('#password').val(doctor.password);
+				$('#image').val(doctor.image);
+			});
+
+			$('#editModal').modal();
+		});
+	});
+</script>
+
+
+<script
+	src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+	integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+	crossorigin="anonymous"></script>
+
+<style>
+.card-header {
+	padding-right: 50px;
+}
+
+.content .contentform {
+	margin-left: 50px;
+	width: 1100px;
+	background-color: gainsboro;
+}
+
+.content .input-group {
+	padding-top: 50px;
+}
+</style>
+</head>
+
+<body>
+	<div class="container">
+		<div class="navigation">
+			<ul>
+				<li><a href=""> <span class="icon">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i><img
+								src="AdminImages/logoHome.png" width="250px" height="60px"></i></span>
+				</a></li>
+				<li><a th:href="@{/AdminPanelHomeForm}"> <span
+						class="title">Dashboard</span>
+				</a></li>
+				<li><a th:href="@{/ViewUserForm}"> <span class="title">Manage
+							User</span></a></li>
+				<li><a th:href="@{/ViewDoctor}"> <span class="title">Doctors</span>
+				</a></li>
+				<li><a th:href="@{/ViewPatientForm}"> <span class="title">Patients</span>
+				</a></li>
+				<li><a th:href="@{/AddScheduleForm}"> <span class="title">Add
+							Schedule</span>
+				</a></li>
+				<li><a th:href="@{/ViewScheduleForm}"> <span class="title">Schedule</span>
+				</a></li>
+				<li><a th:href="@{/ViewReportForm}"> <span class="title">Reports</span>
+				</a></li>
+				<li><a th:href="@{/AdminLogout}"> <span class="title">Sign
+							Out</span>
+				</a></li>
+			</ul>
+		</div>
+	</div>
+
+	<div class="content">
+		<div class="card-header card-header-primary"
+			style="background-color: honeydew;">
+			<h1>
+				<b>Add Schedule</b>
+			</h1>
+		</div>
+
+		<div class="card-header card-header-primary"
+			style="background: honeydew; margin-top: 80px;">
+			<div>
+				<div>
+					<form th:action="@{/AddScheduleForm}">
+						<div class="input-group mb-3">
+							<input type="text" class="form-control"
+								aria-describedby="basic-addon1" name="docName"
+								th:value="${docName}" /> &nbsp; <input type="submit"
+								class="btn btn-primary" value="Search" style="width: 200px;" />
+						</div>
+					</form>
+				</div>
+			</div>
+			<br> <br>
+			<table class="table table-striped">
+				<thead>
+					<tr>
+						<th>#</th>
+						<th></th>
+						<th>Doctor Name</th>
+						<th>Specialty</th>
+						<th></th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="doctor : ${listDoctor}">
+						<td th:text="${doctor.id}"></td>
+						<td>Dr.</td>
+						<td th:text="${doctor.name}"></td>
+						<td th:text="${doctor.specialty}"></td>
+						<td><a
+							th:href="@{/addScheduleForm/(id=${doctor.id})}"
+							class="btn btn-primary" >Add Schedule</a>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+
+
+
+	<!-- Update Add Schedule Modal -->
+<!-- 	<div class="modal fade" id="editModal" tabindex="-1" role="dialog" -->
+<!-- 		aria-labelledby="exampleModalLabel" aria-hidden="true"> -->
+<!-- 		<div class="modal-dialog modal-lg" role="document"> -->
+<!-- 			<div class="modal-content" style="background: honeydew;"> -->
+<!-- 				<div class="modal-header"> -->
+<!-- 					<h1 id="exampleModalLabel" style="font-weight: 700;"> -->
+<!-- 						<b>Add Schedule</b> -->
+<!-- 					</h1> -->
+<!-- 					<button type="button" class="close" data-dismiss="modal" -->
+<!-- 						aria-label="Close"> -->
+<!-- 						<span aria-hidden="true">&times;</span> -->
+<!-- 					</button> -->
+<!-- 				</div> -->
+<!-- 				<div class="modal-body" -->
+<!-- 					style="background: #d3d4d4; padding-top: 50px"> -->
+<!-- 					<form th:action="@{/AddScheduleForm/saveSchedule}" method="POST"> -->
+
+<!-- 						<div class="card-header card-header-primary" -->
+<!-- 							style="background-color: honeydew;"> -->
+<!-- 							<div class="input-group mb-3"> -->
+<!-- 								<div class="input-group-prepend" style="padding-left: 20px;"> -->
+<!-- 									<span class="input-group-text" id="basic-addon1"></span> -->
+<!-- 								</div> -->
+<!-- 								<input type="text" class="form-control" -->
+<!-- 									aria-describedby="basic-addon1" name="doctorid" id="id" -->
+<!-- 									readonly> -->
+<!-- 							</div> -->
+<!-- 							<div class="input-group mb-3"> -->
+<!-- 								<div class="input-group-prepend" style="padding-left: 20px;"> -->
+<!-- 									<span class="input-group-text" id="basic-addon1"></span> -->
+<!-- 								</div> -->
+<!-- 								<input type="text" class="form-control" -->
+<!-- 									aria-describedby="basic-addon1" id="name" readonly> -->
+<!-- 							</div> -->
+<!-- 							<div class="input-group mb-3"> -->
+<!-- 								<div class="input-group-prepend" style="padding-left: 20px;"> -->
+<!-- 									<span class="input-group-text" id="basic-addon1"></span> -->
+<!-- 								</div> -->
+<!-- 								<input type="text" class="form-control" placeholder="Specialty" -->
+<!-- 									aria-label="Specialty" aria-describedby="basic-addon1" -->
+<!-- 									id="specialty" readonly> -->
+<!-- 							</div> -->
+<!-- 							<div class="input-group mb-3"> -->
+<!-- 								<div class="input-group-prepend" style="padding-left: 20px;"> -->
+<!-- 									<span class="input-group-text" id="basic-addon1"></span> -->
+<!-- 								</div> -->
+<!-- 								<input class="form-control" type="date" th:min="${minDate}" -->
+<!-- 									th:value="${minDate}" name="date"> -->
+<!-- 							</div> -->
+<!-- 							<div class="input-group mb-3"> -->
+<!-- 								<div class="input-group-prepend" style="padding-left: 20px;"> -->
+<!-- 									<span class="input-group-text" id="basic-addon1"></span> -->
+<!-- 								</div> -->
+<!-- 								<input class="form-control" type="time" name="time" step="1" -->
+<!-- 									value="00:00:00"> -->
+<!-- 							</div> -->
+<!-- 							<div class="input-group mb-3"> -->
+<!-- 								<div class="input-group-prepend" style="padding-left: 20px;"> -->
+<!-- 									<span class="input-group-text" id="basic-addon1"></span> -->
+<!-- 								</div> -->
+<!-- 								<input type="text" class="form-control" placeholder="Patient Limit" -->
+<!-- 									aria-label="Patient Limit" aria-describedby="basic-addon1" -->
+<!-- 									name="patientCount"> -->
+<!-- 							</div> -->
+
+<!-- 							<div class="modal-footer"> -->
+<!-- 								<button type="button" class="btn btn-secondary" -->
+<!-- 									data-dismiss="modal">Close</button> -->
+<!-- 								<button type="submit" class="btn btn-primary">Save</button> -->
+
+
+<!-- 							</div> -->
+<!-- 						</div> -->
+<!-- 					</form> -->
+<!-- 				</div> -->
+
+<!-- 			</div> -->
+<!-- 		</div> -->
+<!-- 	</div> -->
+
+
+</body>
+
+</html>

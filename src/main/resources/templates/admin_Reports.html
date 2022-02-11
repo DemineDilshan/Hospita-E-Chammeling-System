@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Report</title>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+	integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+	crossorigin="anonymous">
+<link rel="stylesheet" href="AdmnStyles.css">
+
+<style type="text/css">
+label {
+	background-color: white;
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0
+		rgba(0, 0, 0, 0.19);
+	border-radius: 20px;
+	width: 250px;
+	height: 250px;
+	text-align: center;
+	font-size: 200px;
+}
+</style>
+</head>
+
+<body>
+	<div class="container">
+		<div class="navigation">
+			<ul>
+				<li><a href=""> <span class="icon">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i><img
+								src="AdminImages/logoHome.png" width="250px" height="60px"></i></span>
+				</a></li>
+				<li><a th:href="@{/AdminPanelHomeForm}"> <span
+						class="title">Dashboard</span>
+				</a></li>
+				<li><a th:href="@{/ViewUserForm}"> <span class="title">Manage
+							User</span></a></li>
+				<li><a th:href="@{/ViewDoctor}"> <span class="title">Doctors</span>
+				</a></li>
+				<li><a th:href="@{/ViewPatientForm}"> <span class="title">Patients</span>
+				</a></li>
+				<li><a th:href="@{/AddScheduleForm}"> <span class="title">Add
+							Schedule</span>
+				</a></li>
+				<li><a th:href="@{/ViewScheduleForm}"> <span class="title">Schedule</span>
+				</a></li>
+				<li><a th:href="@{/ViewReportForm}"> <span class="title">Reports</span>
+				</a></li>
+				<li><a th:href="@{/AdminLogout}"> <span class="title">Sign
+							Out</span>
+				</a></li>
+			</ul>
+		</div>
+
+		<div class="content">
+			<div class="card-header card-header-primary"
+				style="background-color: honeydew;">
+				<h1>
+					<b>Generate Report</b>
+				</h1>
+			</div>
+			<div class="card-header card-header-primary"
+				style="background: honeydew; margin-top: 80px; margin-left: 2px">
+
+				<div style="margin-left: 20px; margin-top: 25px">
+					<form th:action="@{/exportDoctorsPDF}">
+						<b>Generate Report: Doctor Details</b><br> <br> <b>by
+							Specialty :</b>
+
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+						<select class="custom-select" name="specialty"
+							style="max-width: 250px">
+							<option th:value="'All'" th:text="All"></option>
+							<option th:value="'Cardiologists'" th:text="Cardiologists"></option>
+							<option th:value="'Dermatologists'" th:text="Dermatologists"></option>
+							<option th:value="'Hematologists'" th:text="Hematologists"></option>
+							<option th:value="'Neurologists'" th:text="Neurologists"></option>
+							<option th:value="'Pediatricians'" th:text="Pediatricians"></option>
+							<option th:value="'Physiatrists'" th:text="Physiatrists"></option>
+							<option th:value="'Radiologists'" th:text="Radiologists"></option>
+							<option th:value="'Urologists'" th:text="Urologists"></option>
+						</select>
+
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+						<input type="submit" class="btn btn-primary" value="Generate" />
+					</form>
+				</div>
+
+
+				<hr style="color: black; margin-top: 25px">
+
+
+				<div style="margin-left: 20px; margin-top: 25px">
+					<b>Generate Report: Patient Details</b> <a
+						th:href="@{/exportPatientPDF}" class="btn btn-primary"
+						style="margin-left: 245px">Generate</a>
+				</div>
+
+				<hr style="color: black; margin-top: 25px">
+
+
+				<div style="margin-left: 20px; margin-top: 25px">
+					<b>Generate Report: Schedule Details</b> <a
+						th:href="@{/exportActiveSchedulePDF}" class="btn btn-primary"
+						style="margin-left: 225px">Generate Active Schedules</a>
+						<a
+						th:href="@{/exportInactiveSchedulePDF}" class="btn btn-primary"
+						style="margin-left: 25px">Generate Inactive Schedules</a>
+					
+					
+<!-- 					<form th:action="@{/exportSchedulePDFbyDoctor}"> -->
+<!-- 						<b>by Doctor :</b> -->
+
+<!-- 						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; -->
+<!-- - -->
+<!-- 						<select name="doctor" class="custom-select" -->
+<!-- 							style="max-width: 250px"> -->
+<!-- 							<option th:value="'All'" th:text="All"></option> -->
+<!-- 							<option th:each="doctor : ${listdoctor}" -->
+<!-- 								th:text="${doctor.name} + ' - ' + ${doctor.specialty}" -->
+<!-- 								th:value="${doctor.id}"></option> -->
+<!-- 						</select> -->
+
+<!-- 						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; -->
+
+<!-- 						<input type="submit" class="btn btn-primary" value="Generate" /> -->
+
+<!-- 					</form> -->
+				</div>
+
+
+			</div>
+
+
+
+
+		</div>
+	</div>
+</body>
+
+</html>

@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Appointments</title>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+	integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+	crossorigin="anonymous">
+<link rel="stylesheet" href="style.css">
+<style>
+.containerCon {
+	width: 100%;
+	height: 600px;
+	background-color: azure;
+}
+
+.logo1 {
+	margin-left: 50px;
+	width: 160px;
+	cursor: pointer;
+}
+
+.tablecontent {
+	padding-top: 50px;
+	padding-left: 300px;
+}
+
+table button {
+	width: 200px;
+	height: 35px;
+	border-radius: 25px;
+	box-sizing: border-box;
+	text-decoration: none;
+	text-align: center;
+	font-weight: 600;
+	border: 2px solid black;
+	background: transparent;
+	color: black;
+	cursor: pointer;
+}
+
+* {
+	margin: 0;
+	padding: 0;
+}
+
+body {
+	font-family: 'Nunito', sans-serif;
+}
+
+.header {
+	box-sizing: border-box;
+	position: relative;
+	background-color: beige;
+}
+
+.navbar {
+	width: 100%;
+	height: 15vh;
+	margin: auto;
+	display: flex;
+	align-items: center;
+}
+
+.logo {
+	margin-left: 50px;
+	width: 160px;
+	cursor: pointer;
+}
+
+nav {
+	flex: 1;
+	padding-left: 30px;
+}
+
+nav ul li {
+	display: inline-block;
+	list-style: none;
+	margin: 0px 30px;
+}
+
+nav ul li a {
+	font-weight: 600;
+	font-family: 'Nunito', sans-serif;
+	text-decoration: none;
+	color: #333;
+}
+
+nav ul li a::after {
+	content: '';
+	width: 0%;
+	height: 2px;
+	background: #534c4c;
+	display: block;
+	margin: auto;
+	transition: 0.5s;
+}
+
+nav ul li a:hover:after {
+	width: 100%;
+}
+
+.content {
+	height: 500px;
+	width: 100%;
+	background-color: azure;
+	background-image: url(Images/bghome.png);
+	background-size: cover;
+}
+
+.content h1 {
+	padding-top: 200px;
+	padding-left: 170px;
+	font-family: 'Nunito', sans-serif;
+	font-size: 50px;
+}
+
+.content p {
+	padding-left: 330px;
+	font-family: 'Nunito', sans-serif;
+	font-size: 20px;
+}
+
+.btn1 {
+	margin-left: 370px;
+	display: inline-block;
+	width: 200px;
+	margin-top: 20px;
+	border-radius: 25px;
+	padding: 10px 30px;
+	box-sizing: border-box;
+	text-decoration: none;
+	text-align: center;
+	font-weight: 600;
+	border: 2px solid black;
+	background: transparent;
+	color: black;
+}
+
+.footer {
+	background-color: black;
+	color: #8a8a8a;
+	font-size: 14px;
+	padding: 60px 0 20px;
+}
+
+.container1 ul {
+	margin-left: 500px;
+	margin-top: 0;
+}
+
+.container1 ul li {
+	list-style: none;
+	margin: 5px 0px;
+}
+
+.container1 ul li a {
+	font-family: 'Nunito', sans-serif;
+	text-decoration: none;
+	color: white;
+}
+
+.container1 .logo {
+	padding-top: 50px;
+}
+
+.container {
+	width: 100%;
+	height: auto;
+}
+</style>
+</head>
+
+<body style="background-color: grey">
+
+	<div
+		style="background: honeydew;; margin-top: 75px; margin-bottom: 75px; margin-left: 250px; margin-right: 250px">
+		<div class="modal-header">
+			<h1 style="font-weight: 700;">
+				<b>Appointments</b>
+			</h1>
+			<button type="button" class="close" data-dismiss="modal"
+				aria-label="Close"></button>
+		</div>
+		<div class="modal-body" style="background: #d3d4d4; min-height: 500px">
+			<table class="table table-striped">
+				<thead>
+					<tr>
+						<th style="text-align: center;">Patient Name</th>
+						<th style="text-align: center;">Date</th>
+						<th style="text-align: center;">Starting Time</th>
+						<th style="text-align: center;">Appointment Time</th>
+						<th style="text-align: center;">Appointment Number</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+					</tr>
+					<tr th:each="appointment : ${listAppointment}">
+						<td th:text="${appointment.patient.name}"
+							style="text-align: center;"></td>
+						<td th:text="${appointment.schedule.date}"
+							style="text-align: center;"></td>
+						<td th:text="${appointment.schedule.time}"
+							style="text-align: center;"></td>
+						<td th:text="${appointment.appointmentTime}"
+							style="text-align: center;">></td>
+						<td th:text="${appointment.appointmentNumber}"
+							style="text-align: center;">></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		<div class="modal-footer">
+			<a th:href="@{/ViewDoctorSchedule}" class="btn btn-secondary"
+				data-dismiss="modal">Close</a>
+		</div>
+	</div>
+
+
+
+</body>
+
+</html>

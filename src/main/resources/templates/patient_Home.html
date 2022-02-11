@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="header">
+        <div class="navbar">
+            <a th:href="@{/ViewMainHome}"><img src="Images/logoHome.png" class="logo"></a>
+            <nav>
+                <ul>
+                    <li><a th:href="@{/ViewMainHome}">Home</a></li>
+                    <li><a th:href="@{/ViewMainDoctor}">Doctors</a></li>
+                    <li><a th:href="@{/ViewMainAppointment}">Appointments</a></li>
+                    <li><a th:href="@{/ViewMainContact}">Contact</a></li>
+                    <li><a th:href="@{/ViewMainAccount}">Account</a></li>
+                    <li><a th:href="@{/PatientLogOut}">Log Out</a></li>
+                </ul>
+            </nav>
+        </div>
+        <div class="content">
+            <h1>YOUR HEALTH, YOUR CALL</h1>
+            <p>Be in control of your health always.</p>
+            <a th:href="@{/ViewMainDoctor}" class="btn1">Find Doctor</a>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="container1">
+            <div class="row">
+                <div class="footer-col-1">
+                    <img src="Images/logoHome.png" class="logo">
+                </div>
+                <div class="footer-col-2">
+                    <ul>
+                        <li><a href="Home.html">Home</a></li>
+                        <li><a href="Doctors.html">Doctors</a></li>
+                        <li><a href="Appointments.html">Appointments</a></li>
+                        <li><a href="Contact.html">Contact</a></li>
+                        <li><a href="About.html">About</a></li>
+                        <li><a href="Account.html">Account</a></li>
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+    </footer>
+</body>
+
+
+
+</html>

@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Account</title>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+	integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+	crossorigin="anonymous">
+<link rel="stylesheet" href="style.css">
+
+<style>
+.containerAcc {
+	width: 100%;
+	min-height: 600px;
+	background-color: azure;
+}
+
+.group a {
+	margin-left: 370px;
+	display: inline-block;
+	width: 200px;
+	margin-top: 20px;
+	border-radius: 25px;
+	padding: 10px 30px;
+	box-sizing: border-box;
+	text-decoration: none;
+	text-align: center;
+	font-weight: 600;
+	border: 2px solid black;
+	background: transparent;
+	color: black;
+}
+</style>
+
+
+</head>
+
+<body>
+	<div class="header">
+		<div class="navbar">
+			<a th:href="@{/ViewMainHome}"><img src="Images/logoHome.png"
+				class="logo"></a>
+			<nav>
+				<ul>
+					<li><a th:href="@{/ViewMainHome}">Home</a></li>
+					<li><a th:href="@{/ViewMainDoctor}">Doctors</a></li>
+					<li><a th:href="@{/ViewMainAppointment}">Appointments</a></li>
+					<li><a th:href="@{/ViewMainContact}">Contact</a></li>
+					<li><a th:href="@{/ViewMainAccount}">Account</a></li>
+					<li><a th:href="@{/PatientLogOut}">Log Out</a></li>
+				</ul>
+			</nav>
+		</div>
+	</div>
+
+	<div class="containerAcc">
+		<div class="card-header card-header-primary"
+			style="min-height: 600px;">
+			<div class="group">
+				<div class="btn-group" role="group" aria-label="Basic example"
+					style="margin-left: 420px;">
+					<a th:href="@{/ViewMainAccount}" class="btn btn-secondary">My
+						Profile</a> <a th:href="@{/EditProfiel}" class="btn btn-secondary">Edit
+						Profile</a> <a th:href="@{/ChangePassword}" class="btn btn-secondary">Change
+						Password</a>
+
+				</div>
+			</div>
+			<div class="card-header card-header-primary" style="background-color: grey;margin-right: 30px;margin-right: 30px;margin-top: 50px;border-radius: 50px">
+			<div class="form"
+				style="margin-top: 20px; margin-left: 100px; margin-right: 100px;">
+				<form th:action="@{/UpdatePssword}" method="POST">
+					<div class="form-group">
+						<input type="hidden" class="form-control" name="id"
+							th:value="${id}">
+					</div>
+					<div class="form-group">
+						<input type="hidden" class="form-control"
+							placeholder="Enter Full Name" required name="name"
+							th:value="${name}">
+					</div>
+					<div class="form-group">
+						<input type="hidden" class="form-control"
+							placeholder="Enter Telephone" required name="telephone"
+							th:value="${telephone}">
+					</div>
+					<div class="form-group">
+						<input type="hidden" class="form-control"
+							placeholder="Enter email" required name="email"
+							th:value="${email}">
+					</div>
+					<div class="form-group">
+						<input type="hidden" class="form-control"
+							placeholder="Enter Address" required name="address"
+							th:value="${address}">
+					</div>
+					<div class="form-group">
+						<input type="hidden" class="form-control" name="password"
+							th:value="${password}">
+					</div>
+					<div class="form-group">
+						<label>Current Password</label> <input type="password"
+							class="form-control" placeholder="Current Password" required
+							name="currentpassword" th:value="${currentpassword}" >
+						<div th:if="${param.InvalidCurrentPass}">
+							<div class="alert alert-danger">Incorrect Password</div>
+						</div>
+					</div>
+					<div class="form-group">
+						<label>New Password</label> <input type="password"
+							class="form-control" placeholder="New Password" required
+							name="newpassword" th:value="${newpassword}">
+					</div>
+					<div class="form-group">
+						<label>Confirm Password</label> <input type="password"
+							class="form-control" placeholder="Confirm Password" required
+							name="confirmpassword" th:value="${confirmpassword}">
+							<div th:if="${param.InvalidConfirmPass}">
+							<div class="alert alert-danger">Passwords Does not Match</div>
+						</div>
+					</div>
+					<button type="submit" class="btn btn-primary"
+						style="margin-left: 900px; width: 150px;">Save Changes</button>
+				</form>
+			</div>
+			</div>
+		</div>
+	</div>
+
+
+	<footer class="footer">
+		<div class="container1">
+			<div class="row">
+				<div class="footer-col-1">
+					<img src="Images/logoHome.png" class="logo">
+				</div>
+				<div class="footer-col-2">
+					<ul>
+						<li><a href="Home.html">Home</a></li>
+						<li><a href="Doctors.html">Doctors</a></li>
+						<li><a href="Appointments.html">Appointments</a></li>
+						<li><a href="Contact.html">Contact</a></li>
+						<li><a href="About.html">About</a></li>
+						<li><a href="Account.html">Account</a></li>
+					</ul>
+				</div>
+			</div>
+
+		</div>
+	</footer>
+
+
+</body>
+
+</html>

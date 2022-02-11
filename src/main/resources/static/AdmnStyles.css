@@ -1,0 +1,124 @@
+* {
+    margin: 0;
+    padding: 0;
+    font-family: 'poppins', sans-serif;
+}
+
+body{
+    overflow-x: hidden;
+}
+
+.container {
+    margin-left: -10px;
+    position: relative;
+    width: 100%;
+}
+
+.navigation.active {
+    width: 60px;
+}
+
+.navigation {
+    margin-left: 0px;
+    position: fixed;
+    width: 300px;
+    height: 100%;
+    background: beige;
+    transition: 0.5s;
+    overflow: hidden;
+}
+
+.navigation .active {
+    width: 60px;
+}
+
+.navigation ul {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+}
+
+.navigation ul li {
+    position: relative;
+    width: 100%;
+    list-style: none;
+}
+
+.navigation ul li:hover {
+    background: #03a9f4;
+}
+
+.navigation ul li:nth-child(1) {
+    margin-bottom: 20px;
+}
+
+.navigation ul li:nth-child(1):hover {
+    background: transparent;
+}
+
+.navigation ul li a {
+    position: relative;
+    display: block;
+    width: 100%;
+    display: flex;
+    width: 100%;
+    display: flex;
+    text-decoration: none;
+    color: black;
+}
+
+.navigation ul li a .icon {
+    position: relative;
+    display: block;
+    min-width: 60px;
+    height: 60px;
+    line-height: 60px;
+    text-align: center;
+}
+
+.navigation ul li a .icon .fa {
+    color: #fff;
+    font-size: 24px;
+}
+
+.navigation ul li a .title {
+    position: relative;
+    display: block;
+    padding: 0 10px;
+    height: 60px;
+    line-height: 60px;
+    white-space: nowrap;
+}
+
+.content {
+    position: absolute;
+    width: 1210px;
+    left: 300px;
+    min-height: 100vh;
+    background: #d3d4d4;
+    transition: 0.5s;
+}
+
+.content h1{
+    padding-top: 40px;
+    padding-left: 20px;
+    font-weight: 700;
+}
+
+.card-header {
+    background: #27293d;
+    border: 1;
+    border-radius: 0.2857rem;
+    position: relative;
+    width: 100%;
+    box-shadow: 0 1px 20px 0px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.14);
+    border: 0;
+    margin-bottom: 30px;
+    border-radius: 6px;
+    color: #333333;
+    background: #fff;
+    width: 100%;
+    
+}

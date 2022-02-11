@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Schedule</title>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+	integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+	crossorigin="anonymous">
+<link rel="stylesheet" href="AdmnStyles.css">
+</head>
+
+<body>
+	<div class="container">
+		<div class="navigation">
+			<ul>
+				<li><a href=""> <span class="icon">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i><img
+								src="AdminImages/logoHome.png" width="250px" height="60px"></i></span>
+				</a></li>
+				<li><a th:href="@{/AdminPanelHomeForm}"> <span
+						class="title">Dashboard</span>
+				</a></li>
+				<li><a th:href="@{/ViewUserForm}"> <span class="title">Manage
+							User</span></a></li>
+				<li><a th:href="@{/ViewDoctor}"> <span class="title">Doctors</span>
+				</a></li>
+				<li><a th:href="@{/ViewPatientForm}"> <span class="title">Patients</span>
+				</a></li>
+				<li><a th:href="@{/AddScheduleForm}"> <span class="title">Add
+							Schedule</span>
+				</a></li>
+				<li><a th:href="@{/ViewScheduleForm}"> <span class="title">Schedule</span>
+				</a></li>
+				<li><a th:href="@{/ViewReportForm}"> <span class="title">Reports</span>
+				</a></li>
+				<li><a th:href="@{/AdminLogout}"> <span class="title">Sign
+							Out</span>
+				</a></li>
+			</ul>
+		</div>
+
+		<div class="content">
+			<div class="card-header card-header-primary"
+				style="background-color: honeydew;">
+				<h1>
+					<b>Schedules</b>
+				</h1>
+			</div>
+			<div class="card-header card-header-primary"
+				style="background: honeydew; margin-top: 80px;">
+
+				<a th:href="@{/ViewScheduleForm}" class="btn btn-primary"
+					style="margin-left: 55px; width: 100px">All</a> <a
+					th:href="@{/activeSchedules}" class="btn btn-primary"
+					style="width: 100px">Active</a> <a th:href="@{/inactiveSchedules}"
+					class="btn btn-primary" style="width: 100px">Inactive</a> <br>
+				<br>
+
+				<table class="table table-striped">
+					<thead>
+						<tr>
+							<th>#</th>
+							<th></th>
+							<th>Doctor Name</th>
+							<th>Specialty</th>
+							<th>Date</th>
+							<th>Time</th>
+							<th>Patient Limit</th>
+							<th>Available Number</th>
+							<th></th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="schedule : ${listSchedule}">
+							<td th:text="${schedule.id}"></td>
+							<td>Dr.</td>
+							<td th:text="${schedule.doctor.name}"></td>
+							<td th:text="${schedule.doctor.specialty}"></td>
+							<td th:text="${schedule.date}"></td>
+							<td th:text="${schedule.time}"></td>
+							<td th:text="${schedule.patientCount}"></td>
+							<td th:text="${schedule.availableNumber}"></td>
+							<td><a
+								th:href="@{/ViewScheduleAppointments/(id=${schedule.id})}"
+								class="btn btn-primary">View Appointments</a></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+</body>
+
+</html>

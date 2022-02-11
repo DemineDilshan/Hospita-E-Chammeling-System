@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<title>Registration</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+	integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+	crossorigin="anonymous">
+<link rel="stylesheet" type="text/css" href="stylesforLogin.css">
+<link
+	href="https://fonts.googleapis.com/css?family=Nunito:400,600,700,800&display=swap"
+	rel="stylesheet">
+</head>
+
+<body>
+	<div class="cont">
+		<div class="form sign-up">
+			<h2>Sign Up</h2>
+			<div th:if="${param.FailEmail}">
+				<div class="alert alert-danger" style="text-align: center;">
+					Email is Already Registered Please Try <a
+						th:href="@{/PatientLogIn}" class="forgot-pass-a"> Sign In</a>
+				</div>
+			</div>
+			<div th:if="${param.FailPass}" style="text-align: center;">
+				<div class="alert alert-danger">
+					Passwords doesn't Match Please Try Again
+				</div>
+			</div>
+			<form th:action="@{/processRegistration}" method="POST" style="margin-top: -25px;">
+				<div class="form-group">
+					<label>Name</label> <input type="text" class="form-control"
+						placeholder="Enter Full Name" required autofocus name="name" th:value="${name}">
+				</div>
+				<div class="form-group">
+					<label>Telephone</label> <input type="text" class="form-control"
+						placeholder="Enter Telephone" required name="telephone" th:value="${telephone}" maxlength="10" th:minlength="10">
+				</div>
+				<div class="form-group">
+					<label>Email</label> <input type="email" class="form-control"
+						placeholder="Enter email" required name="email" th:value="${email}">
+				</div>
+				<div class="form-group">
+					<label>Address</label> <input type="text" class="form-control"
+						placeholder="Enter Address" required name="address" th:value="${address}">
+				</div>
+				<div class="form-group">
+					<label>Password</label> <input type="password" class="form-control"
+						placeholder="Enter Password" required name="password" >
+				</div>
+				<div class="form-group">
+					<label>Confirm Password</label> <input type="password"
+						class="form-control" placeholder="Confirm Password" required
+						name="confirmpassword">
+				</div>
+
+				<button type="submit" class="submit">Sign Up Now</button>
+			</form>
+			<p class="forgot-pass">
+				One of US ? <a th:href="@{/PatientLogIn}" class="forgot-pass-a">
+					Sign In</a>
+			</p>
+		</div>
+
+		<div class="sub-cont">
+			<div class="img"></div>
+
+		</div>
+	</div>
+</body>
+
+</html>

@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Edit Profile</title>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+	integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+	crossorigin="anonymous">
+<link rel="stylesheet" href="style.css">
+<style>
+.containerCon {
+	width: 100%;
+	min-height: 600px;
+	background-color: azure;
+}
+
+/*         .savebtns { */
+/*             display: inline-block; */
+/*             width: 150px; */
+/*             border-radius: 25px; */
+/*             box-sizing: border-box; */
+/*             text-decoration: none; */
+/*             text-align: center; */
+/*             font-weight: 600; */
+/*             border: 2px solid black; */
+/*             background: transparent; */
+/*             color: black; */
+/*             height: 30px; */
+/*         } */
+.logo1 {
+	margin-left: 50px;
+	width: 160px;
+	cursor: pointer;
+}
+
+h6 {
+	font-weight: 400;
+	font-size: larger;
+}
+
+.containerCon table {
+	margin-left: 90px;
+	margin-top: 100px;
+}
+</style>
+</head>
+
+<body>
+	<div class="header">
+		<div class="navbar">
+			<a href="Home.html"><img src="Images/logoHome.png" class="logo"></a>
+			<nav>
+				<ul>
+					<li><a th:href="@{/ViewDoctorHome}">Home</a></li>
+					<li><a th:href="@{/ViewDoctorSchedule}">Schedule</a></li>
+					<li><a th:href="@{/DoctorLogOut}">Log Out</a></li>
+				</ul>
+			</nav>
+		</div>
+	</div>
+
+	<div class="containerCon">
+		<div class="card-header card-header-primary row"
+			>
+			<div class="col" style="margin-left: 20px; margin-top: 30px; background-color: grey;border-radius: 50px">
+				<form th:action="@{/editDoctor}" method="POST"
+						enctype="multipart/form-data" style="margin-top: 50px">
+						<input type="hidden" class="form-control"
+									placeholder="Enter Full Name" aria-label="Enter Full Name"
+									aria-describedby="basic-addon1" name="id" id="id" th:value="${id}" readonly>
+					<div class="form-group">
+						<label>Name</label> <input type="text" class="form-control"
+							placeholder="Enter Full Name" required name="name"
+							th:value="${name}">
+					</div>
+					<div class="form-group">
+						<label>Telephone</label> <input type="text" class="form-control"
+							placeholder="Enter Telephone" required name="telephone"
+							th:value="${telephone}" maxlength="10" th:minlength="10">
+					</div>
+					<div class="form-group">
+						<label>Email</label> <input type="email" class="form-control"
+							placeholder="Enter email" required name="email"
+							th:value="${email}">
+							<div th:if="${param.InvalidEmail}">
+								<div class="alert alert-danger">Entered Email  [[${invalidEmail}]] is Already Registered</div>
+							</div>
+					</div>
+					<div class="input-group mb-3">
+
+								<label>Choose Image</label>
+								<div class="input-group-prepend">
+									<input type="file" class="form-control" style="width: 650px"
+										id="fileImage" name="fileImage"
+										accept="image/jpg, imahge/png, image/jpeg" value="">
+								</div>
+							</div>
+					<div class="input-group mb-3">
+						<label>Specialty</label>
+					</div>
+					<div class="input-group mb-3" style="margin-top: -15px">
+						<select class="custom-select" name="specialty" id="specialty">
+
+							<option th:value="${specialty}" th:text="${specialty}"></option>
+							<option th:value="'Cardiologists'" th:text="Cardiologists"></option>
+							<option th:value="'Dermatologists'" th:text="Dermatologists"></option>
+							<option th:value="'Hematologists'" th:text="Hematologists"></option>
+							<option th:value="'Neurologists'" th:text="Neurologists"></option>
+							<option th:value="'Pediatricians'" th:text="Pediatricians"></option>
+							<option th:value="'Physiatrists'" th:text="Physiatrists"></option>
+							<option th:value="'Radiologists'" th:text="Radiologists"></option>
+							<option th:value="'Urologists'" th:text="Urologists"></option>
+						</select>
+
+					</div>
+					
+					<input type="hidden" class="form-control"
+									placeholder="Enter Email" aria-label="Enter Email"
+									aria-describedby="basic-addon1" name="image" id="image" th:value="${image}">
+					
+
+
+					<div class="form-group">
+						<input type="hidden" class="form-control" name="password"
+							th:value="${password}">
+					</div>
+					<div class="form-group">
+						<button type="submit" class="btn btn-primary"
+							style="margin-left: 300px; margin-top: 50px; width: 150px;">Save
+							Changes</button>
+					</div>
+				</form>
+
+			</div>
+			
+			
+			
+			
+			
+			
+			<!-- 			style="border: dotted; margin-top: 100px; margin-bottom: 100px; margin-left: 250px; margin-right: 210px; -->
+			<div class=" col" style="margin-left: 20px; margin-top: 30px; background-color: grey;border-radius: 50px">
+				<form th:action="@{/editDoctorPassword}" method="POST" style="margin-top: 50px">
+					<div class="form-group">
+						<input type="hidden" class="form-control"
+							placeholder="Enter Full Name" required name="name"
+							th:value="${name}">
+					</div>
+					<div class="form-group">
+						<input type="hidden" class="form-control"
+							placeholder="Enter Telephone" required name="telephone"
+							th:value="${telephone}">
+					</div>
+					<div class="form-group">
+						<input type="hidden" class="form-control"
+							placeholder="Enter email" required name="email"
+							th:value="${email}">
+					</div>
+					<div class="form-group">
+						<input type="hidden" class="form-control"
+							placeholder="Enter Specialty" required name="specialty"
+							th:value="${specialty}">
+					</div>
+					<div class="form-group">
+						<label>Current Password</label> <input type="password"
+							class="form-control" placeholder="Current Password" required
+							name="currentpassword" th:value="${currentpassword}">
+						<div th:if="${param.InvalidCurrentPass}">
+							<div class="alert alert-danger">Incorrect Password</div>
+						</div>
+					</div>
+					<div class="form-group">
+						<label>New Password</label> <input type="password"
+							class="form-control" placeholder="New Password" required
+							name="newpassword" th:value="${newpassword}">
+					</div>
+					<div class="form-group">
+						<label>Confirm Password</label> <input type="password"
+							class="form-control" placeholder="Confirm Password" required
+							name="confirmpassword" th:value="${confirmpassword}">
+						<div th:if="${param.InvalidConfirmPass}">
+							<div class="alert alert-danger">Passwords Does not Match</div>
+						</div>
+					</div>
+					<div class="form-group">
+						<button type="submit" class="btn btn-primary"
+							style="margin-left: 300px; margin-top: 50px; width: 150px;">Save
+							Changes</button>
+					</div>
+				</form>
+
+			</div>
+		</div>
+	</div>
+
+	<footer class="footer">
+		<div class="container1">
+			<div class="row">
+				<div class="footer-col-1">
+					<img src="Images/logoHome.png" class="logo1">
+				</div>
+				<div class="footer-col-2">
+					<ul>
+						<li><a href="docHome.html">Home</a></li>
+						<li><a href="docSchedule.html">Schedule</a></li>
+						<li><a href="docAppointments.html">Appointments</a></li>
+					</ul>
+				</div>
+			</div>
+
+		</div>
+	</footer>
+</body>
+
+</html>

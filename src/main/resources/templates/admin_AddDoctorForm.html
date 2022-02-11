@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Add Doctor</title>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+	integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+	crossorigin="anonymous">
+<link rel="stylesheet" href="AdmnStyles.css">
+</head>
+
+<body style="background-color: grey">
+	<div
+		style="background: honeydew; ;margin-top: 75px; margin-bottom: 75px; margin-left: 250px; margin-right: 250px">
+		<div class="modal-header">
+			<h1 style="font-weight: 700;">
+				<b>Add Doctor</b>
+			</h1>
+			<button type="button" class="close" data-dismiss="modal"
+				aria-label="Close">
+				
+			</button>
+		</div>
+		<div class="modal-body" style="background: #d3d4d4; padding-top: 50px">
+			<form th:action="@{/ViewDoctor/saveDoctor}" method="POST"
+						enctype="multipart/form-data">
+						<div class="card-header card-header-primary"
+							style="background-color: honeydew;">
+							<div class="input-group mb-3">
+								<div class="input-group-prepend" style="padding-left: 20px;">
+									<span class="input-group-text" id="basic-addon1"></span>
+								</div>
+								<input type="text" class="form-control"
+									placeholder="Enter Full Name" aria-label="Enter Full Name"
+									aria-describedby="basic-addon1" name="name" required>
+							</div>
+							<div class="input-group mb-3">
+								<div class="input-group-prepend" style="padding-left: 20px;">
+									<span class="input-group-text" id="basic-addon1"></span>
+								</div>
+								<input type="text" class="form-control"
+									placeholder="Enter Email" aria-label="Enter Email"
+									aria-describedby="basic-addon1" name="email" required>
+							</div>
+							<div class="input-group mb-3">
+								<div class="input-group-prepend" style="padding-left: 20px;">
+									<span class="input-group-text" id="basic-addon1"></span>
+								</div>
+								<input type="text" class="form-control"
+									placeholder="Enter Telephone" aria-label="Enter Telephone"
+									aria-describedby="basic-addon1" name="telephone" required maxlength="10" th:minlength="10">
+							</div>
+							<div class="input-group mb-3">
+								<div class="input-group-prepend" style="padding-left: 20px;">
+									<span class="input-group-text" id="basic-addon1"></span>
+								</div>
+								<div class="input-group-prepend">
+									<input type="file" class="form-control" style="width: 650px"
+										id="fileImage" name="fileImage"
+										accept="image/jpg, imahge/png, image/jpeg">
+								</div>
+							</div>
+							<div class="input-group mb-3"
+								style="margin-right: 10px; padding-left: 20px;">
+								<div class="input-group-prepend">
+									<label class="input-group-text" for="inputGroupSelect01">Specialty</label>
+								</div>
+								<select class="custom-select" name="specialty">
+									<option th:value="'Cardiologists'" th:text="Cardiologists"></option>
+									<option th:value="'Dermatologists'" th:text="Dermatologists"></option>
+									<option th:value="'Hematologists'" th:text="Hematologists"></option>
+									<option th:value="'Neurologists'" th:text="Neurologists"></option>
+									<option th:value="'Pediatricians'" th:text="Pediatricians"></option>
+									<option th:value="'Physiatrists'" th:text="Physiatrists"></option>
+									<option th:value="'Radiologists'" th:text="Radiologists"></option>
+									<option th:value="'Urologists'" th:text="Urologists"></option>
+								</select>
+
+							</div>
+							<div class="input-group mb-3">
+								<div class="input-group-prepend" style="padding-left: 20px;">
+									<span class="input-group-text" id="basic-addon1"></span>
+								</div>
+								<input type="password" class="form-control"
+									placeholder="Enter Password" aria-label="Enter Password"
+									aria-describedby="basic-addon1" name="password" required>
+							</div>
+							<div class="input-group mb-3">
+								<div class="input-group-prepend" style="padding-left: 20px;">
+									<span class="input-group-text" id="basic-addon1"></span>
+								</div>
+								<input type="password" class="form-control"
+									placeholder="Confirm Password" aria-label="Confirm Password"
+									aria-describedby="basic-addon1" required>
+							</div>
+							<div class="modal-footer">
+								<a th:href="@{/ViewDoctor}" class="btn btn-secondary"
+									data-dismiss="modal">Close</a>
+								<button type="submit" class="btn btn-primary">Add
+									Doctor</button>
+
+							</div>
+						</div>
+					</form>
+		</div>
+
+	</div>
+</body>
+
+</html>

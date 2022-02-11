@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Users</title>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+	integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+	crossorigin="anonymous">
+<link rel="stylesheet" href="AdmnStyles.css">
+
+
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+	integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+	crossorigin="anonymous"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+	integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+	crossorigin="anonymous"></script>
+
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+<script type="text/javascript">
+	$('document').ready(function() {
+		$(' #addButton').on('click', function(event) {
+
+			$('#addModal').modal();
+		});
+		$('table #editButton').on('click', function(event) {
+
+			event.preventDefault();
+
+			var href = $(this).attr('href')
+
+			$.get(href, function(user) {
+				$('#id').val(user.id);
+				$('#name').val(user.name);
+				$('#email').val(user.email);
+				$('#telephone').val(user.telephone);
+				$('#username').val(user.username);
+				$('#password').val(user.password);
+			});
+
+			$('#editModal').modal();
+		});
+	});
+</script>
+
+
+
+<script
+	src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+	integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+	crossorigin="anonymous"></script>
+
+
+
+
+<style type="text/css">
+.input-group {
+	padding-top: 25px
+}
+</style>
+
+</head>
+
+<body>
+	<div class="container">
+		<div class="navigation">
+			<ul>
+				<li><a href=""> <span class="icon">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i><img
+								src="AdminImages/logoHome.png" width="250px" height="60px"></i></span>
+				</a></li>
+				<li><a th:href="@{/AdminPanelHomeForm}"> <span
+						class="title">Dashboard</span>
+				</a></li>
+				<li><a th:href="@{/ViewUserForm}"> <span class="title">Manage
+							User</span></a></li>
+				<li><a th:href="@{/ViewDoctor}"> <span class="title">Doctors</span>
+				</a></li>
+				<li><a th:href="@{/ViewPatientForm}"> <span class="title">Patients</span>
+				</a></li>
+				<li><a th:href="@{/AddScheduleForm}"> <span class="title">Add
+							Schedule</span>
+				</a></li>
+				<li><a th:href="@{/ViewScheduleForm}"> <span class="title">Schedule</span>
+				</a></li>
+				<li><a th:href="@{/ViewReportForm}"> <span class="title">Reports</span>
+				</a></li>
+				<li><a th:href="@{/AdminLogout}"> <span class="title">Sign
+							Out</span>
+				</a></li>
+			</ul>
+		</div>
+
+		<div class="content">
+			<div class="card-header card-header-primary"
+				style="background-color: honeydew;">
+				<h1>
+					<b>User</b>
+				</h1>
+			</div>
+			<div class="card-header card-header-primary"
+				style="background: honeydew; margin-top: 80px;">
+				<button type="button" class="btn btn-primary" id="addButton"
+					data-toggle="modal" data-target="#addModal">Add New User</button>
+				<br> <br>
+				<table class="table table-striped">
+					<thead>
+						<tr>
+							<th>#</th>
+							<th>Full Name</th>
+							<th>User Name</th>
+							<th>Email</th>
+							<th>Telephone</th>
+							<th></th>
+							<th></th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="user : ${listUser}">
+							<td th:text="${user.id}"></td>
+							<td th:text="${user.name}"></td>
+							<td th:text="${user.username}"></td>
+							<td th:text="${user.email}"></td>
+							<td th:text="${user.telephone}"></td>
+							<td><a th:href="@{/ViewUserForm/showModalForUpdate/(id=${user.id})}"
+								class="btn btn-primary" id="editButton" data-toggle="modal"
+								data-target="#editModal">Update</a> <a
+								th:href="@{/ViewUserForm/deleteUser/{id}(id=${user.id})}"
+								class="btn btn-danger">Delete</a>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+
+
+	<!-- Add New User Modal -->
+	<div class="modal fade" id="addModal" tabindex="-1" role="dialog"
+		aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog modal-lg" role="document">
+			<div class="modal-content" style="background: honeydew;">
+				<div class="modal-header">
+					<h1 id="exampleModalLabel" style="font-weight: 700;">
+						<b>Add New User</b>
+					</h1>
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body"
+					style="background: #d3d4d4; padding-top: 50px">
+					<form th:action="@{/ViewUserForm/saveUser}" method="POST">
+						<div class="card-header card-header-primary"
+							style="background-color: honeydew;">
+							<div class="input-group mb-3">
+								<div class="input-group-prepend" style="padding-left: 20px;">
+									<span class="input-group-text" id="basic-addon1"></span>
+								</div>
+								<input type="text" class="form-control"
+									placeholder="Enter Full Name" aria-label="Enter Full Name"
+									aria-describedby="basic-addon1" name="name">
+							</div>
+							<div class="input-group mb-3">
+								<div class="input-group-prepend" style="padding-left: 20px;">
+									<span class="input-group-text" id="basic-addon1"></span>
+								</div>
+								<input type="text" class="form-control"
+									placeholder="Enter User Name" aria-label="Enter User Name"
+									aria-describedby="basic-addon1" name="username">
+							</div>
+							<div class="input-group mb-3">
+								<div class="input-group-prepend" style="padding-left: 20px;">
+									<span class="input-group-text" id="basic-addon1"></span>
+								</div>
+								<input type="text" class="form-control"
+									placeholder="Enter Email" aria-label="Enter Email"
+									aria-describedby="basic-addon1" name="email">
+							</div>
+							<div class="input-group mb-3">
+								<div class="input-group-prepend" style="padding-left: 20px;">
+									<span class="input-group-text" id="basic-addon1"></span>
+								</div>
+								<input type="text" class="form-control"
+									placeholder="Enter Telephone" aria-label="Enter Telephone"
+									aria-describedby="basic-addon1" name="telephone" maxlength="10" th:minlength="10">
+							</div>
+							<div class="input-group mb-3">
+								<div class="input-group-prepend" style="padding-left: 20px;">
+									<span class="input-group-text" id="basic-addon1"></span>
+								</div>
+								<input type="password" class="form-control"
+									placeholder="Enter Password" aria-label="Enter Password"
+									aria-describedby="basic-addon1" name="password">
+							</div>
+							<div class="input-group mb-3">
+								<div class="input-group-prepend" style="padding-left: 20px;">
+									<span class="input-group-text" id="basic-addon1"></span>
+								</div>
+								<input type="password" class="form-control"
+									placeholder="Confirm Password" aria-label="Confirm Password"
+									aria-describedby="basic-addon1">
+							</div>
+							<div class="modal-footer">
+								<button type="button" class="btn btn-secondary"
+									data-dismiss="modal">Close</button>
+								<button type="submit" class="btn btn-primary">Add
+									User</button>
+
+							</div>
+						</div>
+					</form>
+				</div>
+
+			</div>
+		</div>
+	</div>
+
+
+
+
+	<!-- Update User Modal -->
+	<div class="modal fade" id="editModal" tabindex="-1" role="dialog"
+		aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog modal-lg" role="document">
+			<div class="modal-content" style="background: honeydew;">
+				<div class="modal-header">
+					<h1 id="exampleModalLabel" style="font-weight: 700;">
+						<b>Update User</b>
+					</h1>
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body"
+					style="background: #d3d4d4; padding-top: 50px">
+					<form th:action="@{/ViewUserForm/saveUser}" method="POST">
+						<div class="card-header card-header-primary"
+							style="background-color: honeydew;">
+							<div class="input-group mb-3">
+								<div class="input-group-prepend" style="padding-left: 20px;">
+									<span class="input-group-text" id="basic-addon1"></span>
+								</div>
+								<input type="text" class="form-control"
+									placeholder="Enter Full Name" aria-label="Enter Full Name"
+									aria-describedby="basic-addon1" name="id" id="id" readonly>
+							</div>
+							<div class="input-group mb-3">
+								<div class="input-group-prepend" style="padding-left: 20px;">
+									<span class="input-group-text" id="basic-addon1"></span>
+								</div>
+								<input type="text" class="form-control"
+									placeholder="Enter Full Name" aria-label="Enter Full Name"
+									aria-describedby="basic-addon1" name="name" id="name">
+							</div>
+							<div class="input-group mb-3">
+								<div class="input-group-prepend" style="padding-left: 20px;">
+									<span class="input-group-text" id="basic-addon1"></span>
+								</div>
+								<input type="text" class="form-control"
+									placeholder="Enter User Name" aria-label="Enter User Name"
+									aria-describedby="basic-addon1" name="username" id="username">
+							</div>
+							<div class="input-group mb-3">
+								<div class="input-group-prepend" style="padding-left: 20px;">
+									<span class="input-group-text" id="basic-addon1"></span>
+								</div>
+								<input type="text" class="form-control"
+									placeholder="Enter Email" aria-label="Enter Email"
+									aria-describedby="basic-addon1" name="email" id="email">
+							</div>
+							<div class="input-group mb-3">
+								<div class="input-group-prepend" style="padding-left: 20px;">
+									<span class="input-group-text" id="basic-addon1"></span>
+								</div>
+								<input type="text" class="form-control"
+									placeholder="Enter Telephone" aria-label="Enter Telephone"
+									aria-describedby="basic-addon1" name="telephone" id="telephone" maxlength="10" th:minlength="10">
+							</div>
+							<div class="input-group mb-3"
+								style="padding-right: 20px; padding-left: 20px;">
+							<div class="modal-footer">
+								<input type="hidden" class="form-control"
+									placeholder="Enter Password" aria-label="Enter Password"
+									aria-describedby="basic-addon1" name="password" id="password">
+								<input type="hidden" class="form-control"
+									placeholder="Confirm Password" aria-label="Confirm Password"
+									aria-describedby="basic-addon1">
+								<button type="button" class="btn btn-secondary"
+									data-dismiss="modal">Close</button>
+								<button type="submit" class="btn btn-primary">Update
+									User</button>
+
+							</div>
+						</div>
+						</div>
+					</form>
+				</div>
+
+			</div>
+		</div>
+	</div>
+
+
+</body>
+
+
+
+</html>

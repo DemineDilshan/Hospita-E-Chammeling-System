@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Add Schedule</title>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+	integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+	crossorigin="anonymous">
+<link rel="stylesheet" href="AdmnStyles.css">
+</head>
+
+<body style="background-color: grey">
+	<div
+		style="background: honeydew; ;margin-top: 75px; margin-bottom: 75px; margin-left: 250px; margin-right: 250px">
+		<div class="modal-header">
+			<h1 style="font-weight: 700;">
+				<b>Add Schedule</b>
+			</h1>
+			<button type="button" class="close" data-dismiss="modal"
+				aria-label="Close">
+				
+			</button>
+		</div>
+		<div class="modal-body" style="background: #d3d4d4; padding-top: 50px">
+			<form th:action="@{/AddScheduleForm/saveSchedule}" method="POST">
+
+				<div class="card-header card-header-primary"
+					style="background-color: honeydew;">
+					<div class="input-group mb-3">
+						<div class="input-group-prepend" style="padding-left: 20px;">
+							<span class="input-group-text" id="basic-addon1"></span>
+						</div>
+						<input type="text" class="form-control"
+							aria-describedby="basic-addon1" name="doctorid" id="id" th:value = "${doctorId}" readonly>
+					</div>
+					<div class="input-group mb-3">
+						<div class="input-group-prepend" style="padding-left: 20px;">
+							<span class="input-group-text" id="basic-addon1"></span>
+						</div>
+						<input type="text" class="form-control"
+							aria-describedby="basic-addon1" id="name" th:value = "${doctorName}" readonly>
+					</div>
+					<div class="input-group mb-3">
+						<div class="input-group-prepend" style="padding-left: 20px;">
+							<span class="input-group-text" id="basic-addon1"></span>
+						</div>
+						<input type="text" class="form-control" placeholder="Specialty"
+							aria-label="Specialty" aria-describedby="basic-addon1"
+							id="specialty" th:value = "${doctorSpecialty}" readonly>
+					</div>
+					<div class="input-group mb-3">
+						<div class="input-group-prepend" style="padding-left: 20px;">
+							<span class="input-group-text" id="basic-addon1"></span>
+						</div>
+						<input class="form-control" type="date" th:min="${minDate}"
+							th:value="${minDate}" name="date">
+					</div>
+					<div class="input-group mb-3">
+						<div class="input-group-prepend" style="padding-left: 20px;">
+							<span class="input-group-text" id="basic-addon1"></span>
+						</div>
+						<input class="form-control" type="time" name="time" step="1"
+							value="00:00:00">
+					</div>
+					<div class="input-group mb-3">
+						<div class="input-group-prepend" style="padding-left: 20px;">
+							<span class="input-group-text" id="basic-addon1"></span>
+						</div>
+						<input type="text" class="form-control"
+							placeholder="Patient Limit" aria-label="Patient Limit"
+							aria-describedby="basic-addon1" name="patientCount" required>
+					</div>
+
+					<div class="modal-footer">
+						<a th:href="@{/AddScheduleForm}" class="btn btn-secondary">Close</a>
+						<button type="submit" class="btn btn-primary">Save</button>
+
+
+					</div>
+				</div>
+			</form>
+		</div>
+
+	</div>
+</body>
+
+</html>
